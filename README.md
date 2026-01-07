@@ -9,7 +9,7 @@ Qasa doesn't have an API that's open to devs. But using super cool hacking skill
 
 So, I did the lazy thing and just filtered the search on the Qasa website, then copied the GraphQL query it generated, and added it as a HTTP POST here in the code. This is sent every 60 seconds, giving me a JSON list of the properties for rent. 
 
-Using some vibe-coding, I then simply extract the fields I want, making a listing object for each listing, and then format and send it to a server channel in Discord.
+Using some vibe-coding, I then simply parsed and extract the JSON fields I wanted, makde a listing object for each listing, and then formated this to be sent as a bot message in a server channel in Discord.
 
 # How do I run this?
 

@@ -81,7 +81,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	// Add any message handling logic here if needed
+	// Add any other message handling logic here if needed
 }
 
 // monitorApartments checks for new apartment ads every 60 seconds
@@ -202,7 +202,7 @@ func sendNotification(s *discordgo.Session, listing Listing, isNew bool) {
 func getListings() ([]Listing, error) {
 	baseURL := "https://api.qasa.se/graphql"
 
-	// Build the request URL with query parameters
+	// Build the request with GraphQL query parameters
 	query := []byte(`{"operationName":"HomeSearch","variables":{"limit":60,"offset":0,"order":{"direction":"descending","orderBy":"published_or_bumped_at"},"params":{"homeType":["apartment","loft"],"shared":false,"maxMonthlyCost":20000,"currency":"NOK","areaIdentifier":["no/oslo"],"rentalType":["long_term"],"markets":["sweden","norway","finland"]}},"query":"query HomeSearch($order: HomeIndexSearchOrderInput, $offset: Int, $limit: Int, $params: HomeSearchParamsInput) {\n  homeIndexSearch(order: $order, params: $params) {\n    documents(offset: $offset, limit: $limit) {\n      hasNextPage\n      hasPreviousPage\n      nodes {\n        bedroomCount\n        blockListing\n        rentalLengthSeconds\n        householdSize\n        corporateHome\n        description\n        endDate\n        firstHand\n        furnished\n        homeType\n        id\n        instantSign\n        market\n        lastBumpedAt\n        monthlyCost\n        petsAllowed\n        platform\n        publishedAt\n        publishedOrBumpedAt\n        rent\n        currency\n        roomCount\n        seniorHome\n        shared\n        shortcutHome\n        smokingAllowed\n        sortingScore\n        squareMeters\n        startDate\n        studentHome\n        tenantBaseFee\n        title\n        wheelchairAccessible\n        finnishLandlordAssociation\n        location {\n          id\n          locality\n          countryCode\n          streetNumber\n          point {\n            lat\n            lon\n            __typename\n          }\n          route\n          __typename\n        }\n        displayStreetNumber\n        uploads {\n          id\n          order\n          type\n          url\n          __typename\n        }\n        __typename\n      }\n      pagesCount\n      totalCount\n      __typename\n    }\n    __typename\n  }\n}"}`)
 	bodyReader := bytes.NewReader(query)
 	req, err := http.NewRequest(http.MethodPost, baseURL, bodyReader)
@@ -211,7 +211,7 @@ func getListings() ([]Listing, error) {
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-
+	req.Header.Set("User-Agent", "Qasa-Discord-Bot/1.0")
 	// Make the HTTP request
 	client := &http.Client{}
 	resp, err := client.Do(req)

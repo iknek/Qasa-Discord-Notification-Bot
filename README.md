@@ -5,11 +5,11 @@ So, for lack of a Qasa mobile app, I decided to make this little Discord bot, wh
 
 # How's it work?
 
-Qasa doesn't have an API that's open to devs. But using super cool hacking skills (i.e., clicking F12 in my browser and going to the network tab), its clear that every time you do a search on the site, it fires off a querty (POST request) to a GraphQL backend server.
+Qasa doesn't have an API that's open to devs. But using super cool hacking skills (i.e., clicking F12 in my browser and going to the network tab), its clear that every time you do a search on the site, it fires off a query (POST request) to a GraphQL backend server.
 
-So, I did the lazy thing and just filtered my search on the Qasa website, then copied the GraphQL query it generated, and added it as a HTTP POST here in the code. This is sent every 60 seconds, giving me a JSON list of the properties for rent. 
+So, I did the lazy thing and just created a filtered search on the Qasa website, then copied the GraphQL query it generated, and added it as a HTTP POST here in the code. This is sent every 60 seconds, giving a JSON list of the properties for rent. 
 
-Using some vibe-coding, I then simply extract the fields I want, making a listing object for each listing, and then format and send it to a server channel in Discord.
+Using some vibe-coding, we can then simply extract the desired fields, make a listing object for each advertisement, and then format and send it to a server channel in Discord.
 
 # How do I run this?
 

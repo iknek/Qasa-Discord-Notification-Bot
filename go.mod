@@ -1,6 +1,6 @@
 module qasabot
 
-go 1.21.0
+go 1.27.3
 
 require (
 	github.com/bwmarrin/discordgo v0.29.0 // indirect
